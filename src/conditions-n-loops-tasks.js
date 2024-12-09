@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,14 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (b > a) {
+    if (c > b) {
+      return c;
+    }
+    return b;
+  }
+  return a;
 }
 
 /**
@@ -60,8 +66,17 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x) {
+    return true;
+  }
+  if (queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -82,8 +97,17 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
+  }
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  if (a === b || a === c || b === c) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -100,8 +124,39 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  if (num / 10 > 0) {
+    const ten = Math.floor(num / 10);
+    for (let i = 0; i < ten; i += 1) {
+      result += 'X';
+    }
+  }
+  if (num % 10 < 4) {
+    const one = num % 10;
+    for (let i = 0; i < one; i += 1) {
+      result += 'I';
+    }
+  }
+  if (num % 10 === 4) {
+    result += 'IV';
+  }
+  if (num % 10 === 5 || num === 5) {
+    result += 'V';
+  }
+  if (num % 10 === 6 || num === 6) {
+    result += 'VI';
+  }
+  if (num % 10 === 7 || num === 7) {
+    result += 'VII';
+  }
+  if (num % 10 === 8 || num === 8) {
+    result += 'VIII';
+  }
+  if (num % 10 === 9 || num === 9) {
+    result += 'IX';
+  }
+  return result;
 }
 
 /**
