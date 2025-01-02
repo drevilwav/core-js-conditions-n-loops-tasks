@@ -352,8 +352,48 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      matrix[i][j] = 0;
+    }
+  }
+
+  let top = 0;
+  let left = 0;
+  let right = size - 1;
+  let bottom = size - 1;
+  let currentNum = 1;
+
+  while (currentNum <= size * size) {
+    for (let c1 = left; c1 <= right && currentNum <= size * size; c1 += 1) {
+      matrix[top][c1] = currentNum;
+      currentNum += 1;
+    }
+    top += 1;
+
+    for (let r1 = top; r1 <= bottom && currentNum <= size * size; r1 += 1) {
+      matrix[r1][right] = currentNum;
+      currentNum += 1;
+    }
+    right -= 1;
+
+    for (let c2 = right; c2 >= left && currentNum <= size * size; c2 -= 1) {
+      matrix[bottom][c2] = currentNum;
+      currentNum += 1;
+    }
+    bottom -= 1;
+
+    for (let r2 = bottom; r2 >= top && currentNum <= size * size; r2 -= 1) {
+      matrix[r2][left] = currentNum;
+      currentNum += 1;
+    }
+    left += 1;
+  }
+
+  return matrix;
 }
 
 /**
@@ -371,8 +411,31 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const mat = matrix;
+  const l = matrix.length;
+
+  for (let i = 0; i < l; i += 1) {
+    for (let j = i + 1; j < l; j += 1) {
+      const temp = mat[i][j];
+      mat[i][j] = mat[j][i];
+      mat[j][i] = temp;
+    }
+  }
+
+  for (let i = 0; i < l; i += 1) {
+    let left = 0;
+    let right = l - 1;
+    while (left < right) {
+      const temp = mat[i][left];
+      mat[i][left] = mat[i][right];
+      mat[i][right] = temp;
+      left += 1;
+      right -= 1;
+    }
+  }
+
+  return mat;
 }
 
 /**
@@ -389,8 +452,18 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const num = arr;
+  for (let i = 1; i < num.length; i += 1) {
+    const current = num[i];
+    let j = i - 1;
+    while (j >= 0 && num[j] > current) {
+      num[j + 1] = num[j];
+      j -= 1;
+    }
+    num[j + 1] = current;
+  }
+  return num;
 }
 
 /**
@@ -410,8 +483,24 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let arr = str;
+  for (let i = 0; i < iterations; i += 1) {
+    let a = '';
+    let b = '';
+    for (let j = 0; j < arr.length; j += 1) {
+      if (j % 2 === 0) {
+        a += arr[j];
+      } else {
+        b += arr[j];
+      }
+    }
+    arr = a + b;
+    if (arr === str) {
+      return shuffleChar(str, iterations % i);
+    }
+  }
+  return arr;
 }
 
 /**
