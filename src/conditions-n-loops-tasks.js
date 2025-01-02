@@ -485,7 +485,7 @@ function sortByAsc(arr) {
  */
 function shuffleChar(str, iterations) {
   let arr = str;
-  for (let i = 0; i < iterations; i += 1) {
+  for (let i = 1; i <= iterations; i += 1) {
     let a = '';
     let b = '';
     for (let j = 0; j < arr.length; j += 1) {
